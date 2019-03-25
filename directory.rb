@@ -12,14 +12,25 @@ students = [
   "Joffrey Baratheon",
   "Norman Bates"
 ]
-puts "The students of Villains Academy"
-puts "------------"
 
-# print each item in the array
-students.each do |student|
-    puts student
+def print_header
+  puts "The students of Villains Academy"
+  puts "------------"
 end
 
-# Print the total number of students 
-# print() doesn't add a new line character
-puts "Overall, we have #{students.count} great students"
+def print(names)
+  names.each do |name|
+    puts name
+  end
+end
+
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students"
+end
+
+# We need to call the methods with any required arguements
+# Methods don't have access to local variables that are defined outside of them
+
+print_header
+print(students)
+print_footer(students)
