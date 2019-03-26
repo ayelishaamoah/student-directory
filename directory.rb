@@ -6,9 +6,20 @@ def input_students
   students = [ ]
   # get the first name from the user
   name = gets.chomp
-  # while the name array isn't empty, repeat
+  # while the name variable isn't empty, repeat
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    # get student information from the user and set any default values if question skipped
+    puts "Which cohort will they be joining?"
+    cohort = gets.chomp
+    cohort = "Unknown" if cohort == ""
+    puts "How old are they?"
+    age = gets.chomp
+    age = "Unknown" if age == ""
+    puts "What country are they from?"
+    country = gets.chomp
+    country = "Unknown" if country == ""
+    
+    students << {name: name, cohort: cohort.to_sym, age: age, country: country}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -18,17 +29,18 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "------------"
+  puts "The students of Villains Academy".center(60)
+  puts "------------".center(60)
 end
 
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}.#{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. Name: #{student[:name]}, Age: #{student[:age]}, Country: #{student[:country]}, Cohort: #{student[:cohort]}"
   end
 end
 
 def print_by_letter(students)
+  puts
   puts "Please enter a letter that you would like to search by"
   input = gets.chomp.upcase
   
@@ -38,11 +50,19 @@ def print_by_letter(students)
       puts "#{student[:name]}"
     end
   end
-  
+end
+
+def print_names_less_than_12(students)
+  puts "These are the students with names that are less than 12 characters long:"
+  students.each do |student|
+    if student[:name].length < 12
+      puts "#{student[:name]}"
+    end
+  end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(60)
 end
 
 # We need to call the methods with any required arguements
@@ -54,3 +74,5 @@ print(students)
 print_footer(students)
 # Exercise 8.2 print by letter
 print_by_letter(students)
+# Exercise 8.3 print names less than 12 characters
+print_names_less_than_12(students)
