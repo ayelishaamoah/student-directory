@@ -28,13 +28,17 @@ def print(students)
   end
 end
 
-def print_by_letter(students, letter)
-  puts "These are the students with names beginning with #{letter}:"
+def print_by_letter(students)
+  puts "Please enter a letter that you would like to search by"
+  input = gets.chomp.upcase
+  
+  puts "These are the students with names beginning with #{input}:"
   students.each do |student|
-    if student[:name].start_with?(letter)
+    if student[:name].start_with?(input)
       puts "#{student[:name]}"
     end
   end
+  
 end
 
 def print_footer(names)
@@ -49,4 +53,4 @@ print_header
 print(students)
 print_footer(students)
 # Exercise 8.2 print by letter
-print_by_letter(students, "A")
+print_by_letter(students)
