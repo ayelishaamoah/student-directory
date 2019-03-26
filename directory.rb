@@ -28,6 +28,15 @@ def print(students)
   end
 end
 
+def print_by_letter(students, letter)
+  puts "These are the students with names beginning with #{letter}:"
+  students.each do |student|
+    if student[:name].start_with?(letter)
+      puts "#{student[:name]}"
+    end
+  end
+end
+
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
@@ -39,17 +48,5 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-
-=begin
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-=end
+# Exercise 8.2 print by letter
+print_by_letter(students, "A")
