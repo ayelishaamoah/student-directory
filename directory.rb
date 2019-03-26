@@ -10,13 +10,13 @@ def input_students
   while !name.empty? do
     # get student information from the user and set any default values if question skipped
     puts "Which cohort will they be joining?"
-    cohort = gets.chomp
+    cohort = gets.gsub(/\n/,"")
     cohort = "Unknown" if cohort == ""
     puts "How old are they?"
-    age = gets.chomp
+    age = gets.gsub(/\n/,"")
     age = "Unknown" if age == ""
     puts "What country are they from?"
-    country = gets.chomp
+    country = gets.gsub(/\n/,"")
     country = "Unknown" if country == ""
     
     students << {name: name, cohort: cohort.to_sym, age: age, country: country}
@@ -27,7 +27,7 @@ def input_students
       puts "Now we have #{students.count} students"
     end
     # get another name from the user
-    name = gets.chomp
+    name = gets.gsub(/\n/,"")
   end
   # return the array of students
   students
