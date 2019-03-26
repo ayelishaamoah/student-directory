@@ -20,7 +20,12 @@ def input_students
     country = "Unknown" if country == ""
     
     students << {name: name, cohort: cohort.to_sym, age: age, country: country}
-    puts "Now we have #{students.count} students"
+    
+    if students.length == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
     name = gets.chomp
   end
@@ -66,9 +71,14 @@ def print_names_less_than_12(students)
     end
   end
 end
-
+#Right now if we have only one student, the user will see a message "Now we have 1 students",
+#whereas it should be "Now we have 1 student". How can you fix it so that it used singular form when appropriate and plural form otherwise?
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students".center(60)
+  if names.count == 1
+    puts "Overall, we have #{names.count} great student".center(60)
+  else
+    puts "Overall, we have #{names.count} great students".center(60)
+  end
 end
 
 # We need to call the methods with any required arguements
