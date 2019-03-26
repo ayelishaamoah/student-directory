@@ -3,7 +3,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish just hit return twice"
   # Create an empty array to store the student information
-  students = [ ]
+  students = []
   # get the first name from the user
   name = gets.chomp
   # while the name variable isn't empty, repeat
@@ -34,8 +34,14 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. Name: #{student[:name]}, Age: #{student[:age]}, Country: #{student[:country]}, Cohort: #{student[:cohort]}"
+  cohorts = students.map { |student| student[:cohort] }.uniq
+  cohorts.each do |cohort|
+    puts "#{cohort} Cohort:"
+    students.each do |student|
+      if student[:cohort] == cohort
+        puts "Name: #{student[:name]}, Age:#{student[:age]}, Country: #{student[:country]}"
+      end
+    end
   end
 end
 
@@ -72,7 +78,9 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+=begin
 # Exercise 8.2 print by letter
 print_by_letter(students)
 # Exercise 8.3 print names less than 12 characters
 print_names_less_than_12(students)
+=end
