@@ -96,8 +96,7 @@ def print_names_less_than_12(students)
     end
   end
 end
-#Right now if we have only one student, the user will see a message "Now we have 1 students",
-#whereas it should be "Now we have 1 student". How can you fix it so that it used singular form when appropriate and plural form otherwise?
+
 def print_footer(names)
   if names.count == 1
     puts "Overall, we have #{names.count} great student".center(60)
