@@ -4,9 +4,7 @@ def interactive_menu
   # Loop indefinitely - until the program terminates
   loop do
   # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
+    print_menu
     selection = gets.chomp
   # 3. do what the user has asked
     case selection
@@ -22,6 +20,12 @@ def interactive_menu
         puts "I don't know what you mean, try again"
     end
   end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
 end
 
 def input_students
