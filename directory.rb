@@ -1,3 +1,5 @@
+require 'csv'
+
 # put all of the students in an array
 @students = []
 
@@ -54,25 +56,19 @@ def add_student(name, cohort)
 end
 
 def save_students
-  File.open("students.csv", "w") { |file|
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  CSV.open("students.csv", "wb") do |csv|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv << student_data
+    end
   end
-  }
 end
 
-# We can add in a default arguement value if nothing is passed in to the method
 def load_students(filename = "students.csv")
-  File.open(filename, "r") { |file|
-  # Read all of the lines in a file and return an array
-  file.readlines.each do |line|
-    # Each line with have a trailing newline character
-    name, cohort = line.chomp.split(",")
-    add_student(name, cohort)
+  CSV.foreach(filename) do |row|
+    name, cohort = row[0], row[1]
+      add_student(name, cohort)
   end
-  }
 end
 
 def try_load_students(filename = "students.csv")
