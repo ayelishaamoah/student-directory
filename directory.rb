@@ -4,19 +4,19 @@
 def interactive_menu
   loop do
     print_menu
-    menu_process(STDIN.gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to a file"
+  puts "3. Save the list to students.csv"
   puts "4. Load the list from students.csv"
   puts "9. Exit"
 end
 
-def menu_process(selection)
+def process(selection)
   case selection
     when "1"
       input_students
@@ -49,9 +49,7 @@ def add_student(name, cohort)
 end
 
 def save_students
-  puts "Which file would you like to save to?"
-  filename = gets.chomp
-  file = File.open(filename, "w")
+  file = File.open("students.csv", "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
@@ -62,10 +60,7 @@ def save_students
 end
 
 # We can add in a default arguement value if nothing is passed in to the method
-def load_students(default_file = "students.csv")
-  puts "Which file would you like to load?"
-  filename = gets.chomp
-  filename = default_file if filename.empty?
+def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   # Read all of the lines in a file and return an array
   file.readlines.each do |line|
