@@ -71,9 +71,8 @@ def load_students(filename = "students.csv")
   file.close
 end
 
-def try_load_students
-  filename = ARGV.first
-  return if filename.nil?
+def try_load_students(filename = "students.csv")
+  filename = ARGV.first if !ARGV.first.nil?
   if File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
