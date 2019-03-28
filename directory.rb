@@ -38,10 +38,14 @@ def input_students
   puts "To finish, just hit return twice"
   name = STDIN.gets.chomp
   while !name.empty? do
-    @students << {name: name, cohort: :november}
+    add_student(name, name = "november")
     puts "Now we have #{@students.count} students"
     name = STDIN.gets.chomp
   end
+end
+
+def add_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def save_students
@@ -62,7 +66,7 @@ def load_students(filename = "students.csv")
   file.readlines.each do |line|
     # Each line with have a trailing newline character
     name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student(name, cohort)
   end
   file.close
 end
