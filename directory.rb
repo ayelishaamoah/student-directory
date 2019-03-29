@@ -13,8 +13,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to csv file"
+  puts "4. Load the list from csv file"
   puts "9. Exit"
 end
 
@@ -27,10 +27,10 @@ def process(selection)
       puts "You selected \"2. Show the students\""
       show_students
     when "3"
-      puts "You selected \"3. Save the list to students.csv\""
+      puts "You selected \"3. Save the list to csv file\""
       save_students
     when "4"
-      puts "You selected \"4. Load the list from students.csv\""
+      puts "You selected \"4. Load the list from a csv file\", please enter the file that you would like to load"
       load_students
     when "9"
       puts "You selected \"9. Exit\""
@@ -56,7 +56,9 @@ def add_student(name, cohort)
 end
 
 def save_students
-  CSV.open("students.csv", "wb") do |csv|
+  puts "Please enter the file that you would like to save the students to"
+  filename = gets.chomp
+  CSV.open(filename, "wb") do |csv|
     @students.each do |student|
       student_data = [student[:name], student[:cohort]]
       csv << student_data
@@ -65,6 +67,8 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
+  file = gets.chomp
+  filename = file if !file.empty?
   CSV.foreach(filename) do |row|
     name, cohort = row[0], row[1]
       add_student(name, cohort)
